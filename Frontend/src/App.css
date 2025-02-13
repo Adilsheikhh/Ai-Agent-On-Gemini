@@ -1,0 +1,368 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Root Variables
+   ========================================================================== */
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --success-color: #22c55e;
+  --error-color: #ef4444;
+
+  --bg-dark: #121212;
+  --surface-dark: #242424;
+  --text-dark: #E0E0E0;
+
+  --bg-light: #f8fafc;
+  --surface-light: #ffffff;
+  --text-light: #44475a;
+  --transition-speed: 0.3s;
+}
+
+/* ==========================================================================
+   Body Styles
+   ========================================================================== */
+
+body {
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+body.light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   App Container
+   ========================================================================== */
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Navbar Styles
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Greeting Message
+   ========================================================================== */
+
+.greeting-message {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin: 7rem 0 3rem;
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   Main Container
+   ========================================================================== */
+
+.main-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 3rem;
+}
+
+/* ==========================================================================
+   Editor Container
+   ========================================================================== */
+
+.editor-container {
+  background-color: var(--surface-dark); /* Fallback */
+  background-color: rgba(36, 36, 36, 0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.code-editor {
+  min-height: 400px !important;
+  padding: 1.5rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  background: transparent !important;
+  color: var(--text-dark) !important;
+}
+
+.code-editor textarea {
+  outline: none !important;
+  resize: none !important;
+  color: var(--text-dark) !important;
+}
+
+/* ==========================================================================
+   Submit Button
+   ========================================================================== */
+
+.submit-button {
+  margin: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+  will-change: background-color, transform;
+  float: right;
+}
+
+.submit-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Response Container
+   ========================================================================== */
+
+.response-container {
+    background-color: var(--surface-dark);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+}
+
+.response-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.response-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.response-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+    color: var(--text-dark);
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+}
+
+.copy-button:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+.copy-button:active {
+  transform: translateY(0);
+}
+
+.response-content {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   Markdown Styles
+   ========================================================================== */
+
+.response-content pre {
+  background-color: #333;
+  color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.response-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+
+.response-content p {
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 1rem;
+  }
+  
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .greeting-message {
+    margin: 5rem 0 2rem;
+  }
+  
+  .code-editor {
+    min-height: 300px !important;
+    font-size: 0.85rem !important;
+  }
+  
+  .submit-button {
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    float: none;
+  }
+}
+
+/* ==========================================================================
+   Custom Scrollbar
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* ==========================================================================
+   Dark Mode Specific Styles
+   ========================================================================== */
+
+body.dark .editor-container,
+body.dark .response-container {
+  /* Using var(--surface-dark) is now more effective */
+}
+
+/* ==========================================================================
+   Light Mode Specific Styles
+   ========================================================================== */
+
+body.light .editor-container,
+body.light .response-container {
+  background: rgba(24, 24, 24, 0.8);
+}
+
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Specific overrides for light mode */
+body.light .response-content {
+    color: #f0e4e4; /* Explicitly set a dark color for response content in light mode */
+}
+
+body.light .response-content pre {
+  background: rgba(0, 0, 0, 0.08); /* Slightly darker pre background for better definition */
+  color: #222; /* Ensure code within pre is readable */
+}
+
+body.light .response-header h2 {
+    color: #333; /* Ensure header text is readable */
+}
